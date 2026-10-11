@@ -1,0 +1,199 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Need a New ID? — Lotus365</title>
+<meta name="description" content="Create your Lotus365 ID in about 2 minutes. Quick sign-up, simple process.">
+<meta name="theme-color" content="#0c9971">
+<meta name="format-detection" content="telephone=no">
+<link rel="icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj48cmVjdCB3aWR0aD0iNTEyIiBoZWlnaHQ9IjUxMiIgcng9Ijk2IiBmaWxsPSIjMDA4ODYxIi8+PHBhdGggZmlsbD0iI2ZmZiIgZD0iTTE1MCAxMTJoODR2MjIwaDEyOHY2OEgxNTB6Ii8+PGNpcmNsZSBjeD0iMzUyIiBjeT0iMTcyIiByPSI0NCIgZmlsbD0iI2Y5ZGYxMCIvPjwvc3ZnPgo=" type="image/svg+xml">
+<link rel="preconnect" href="https://lotus365.ac">
+<link rel="dns-prefetch" href="https://lotus365.ac">
+<link rel="dns-prefetch" href="https://connect.facebook.net">
+<style>
+  :root {
+    --bg: #03231b;
+    --card: #06382b;
+    --tile: #0a4334;
+    --line: rgba(249, 223, 16, .16);
+    --text: #f4fbf8;
+    --muted: #b4d3c8;
+    --green: #f9df10;      /* Lotus365 yellow: dots, checks, focus */
+    --green-hi: #f9df10;
+    --accent: #f9df10;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { background: var(--bg); }
+  body {
+    min-height: 100vh; min-height: 100dvh;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    color: var(--text); background: var(--bg);
+    background-image:
+      radial-gradient(70% 45% at 50% 0%, rgba(12, 153, 113, .55), transparent 70%),
+      radial-gradient(60% 35% at 50% 100%, rgba(127, 186, 66, .22), transparent 70%),
+      linear-gradient(rgba(255,255,255,.035) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,.035) 1px, transparent 1px);
+    background-size: auto, auto, 56px 56px, 56px 56px;
+    display: flex; align-items: center; justify-content: center;
+    padding: 24px 16px;
+    padding-bottom: 24px; padding-bottom: max(24px, env(safe-area-inset-bottom));
+  }
+  main {
+    width: 100%; max-width: 440px; text-align: center;
+    background: linear-gradient(180deg, rgba(8, 72, 55, .92), rgba(4, 40, 31, .96));
+    border: 1px solid var(--line); border-radius: 28px;
+    padding: 26px 18px 18px;
+    box-shadow: 0 0 0 1px rgba(255,255,255,.02), 0 20px 60px rgba(0,0,0,.45), 0 0 80px rgba(12,153,113,.25);
+  }
+  .pill {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-size: 12px; font-weight: 800; letter-spacing: 1.6px; text-transform: uppercase;
+    color: var(--accent);
+  }
+  .pill i { width: 8px; height: 8px; border-radius: 50%; background: var(--green); box-shadow: 0 0 0 4px rgba(249,223,16,.2); }
+  .app-icon {
+    width: 84px; height: 84px; margin: 18px auto 16px; border-radius: 24px;
+    display: flex; align-items: center; justify-content: center;
+    background: #008861; overflow: hidden;
+    box-shadow: 0 0 0 8px rgba(249,223,16,.1), 0 10px 30px rgba(12,153,113,.45);
+  }
+  .app-icon img { display: block; width: 100%; height: 100%; }
+  h1 { font-size: 40px; line-height: 1.05; font-weight: 900; letter-spacing: -1.2px; }
+  h1 span {
+    color: var(--green-hi);
+    background: linear-gradient(90deg, #f9df10, #b6e04a);
+    -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+  }
+  .lead { margin: 14px auto 0; max-width: 360px; font-size: 15px; line-height: 1.55; color: var(--muted); }
+  .tiles { display: flex; gap: 8px; margin-top: 20px; }
+  .tile {
+    flex: 1; min-width: 0; padding: 14px 6px 12px; border-radius: 16px;
+    background: var(--tile); border: 1px solid var(--line);
+    font-size: 12.5px; font-weight: 700;
+  }
+  .tile b {
+    width: 34px; height: 34px; margin: 0 auto 8px; border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    background: rgba(249,223,16,.12); font-size: 16px; font-weight: 700; color: var(--green-hi);
+  }
+  .msg {
+    margin-top: 12px; padding: 12px 14px; border-radius: 16px; text-align: left;
+    background: var(--tile); border: 1px solid var(--line);
+    display: flex; align-items: center; gap: 12px;
+  }
+  .msg .av {
+    width: 40px; height: 40px; flex-shrink: 0; border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    background: #f9df10; color: #111; font-weight: 800; font-size: 15px;
+  }
+  .msg div { flex: 1; min-width: 0; }
+  .msg small { display: block; font-size: 11px; letter-spacing: .8px; text-transform: uppercase; color: var(--muted); }
+  .msg strong { display: block; margin-top: 3px; font-size: 15px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .dots { display: flex; gap: 4px; }
+  .dots i { width: 6px; height: 6px; border-radius: 50%; background: var(--green); animation: blink 1.2s infinite; }
+  .dots i:nth-child(2) { animation-delay: .2s; }
+  .dots i:nth-child(3) { animation-delay: .4s; }
+  @keyframes blink { 0%, 60%, 100% { opacity: .3; } 30% { opacity: 1; } }
+  .cta {
+    margin-top: 16px; min-height: 60px; border-radius: 18px;
+    display: flex; align-items: center; justify-content: center; gap: 10px;
+    background: #f9df10;
+    color: #111; text-decoration: none;
+    font-size: 17px; font-weight: 900; letter-spacing: .3px;
+    box-shadow: 0 10px 30px rgba(249,223,16,.3);
+    animation: nudge 2.6s ease-in-out infinite;
+  }
+  .cta:active { transform: scale(.98); }
+  @keyframes nudge { 0%, 85%, 100% { transform: scale(1); } 92% { transform: scale(1.025); } }
+  .checks {
+    display: flex; flex-wrap: wrap; justify-content: center; gap: 6px 14px;
+    margin-top: 14px; font-size: 12.5px; font-weight: 600; color: var(--muted);
+  }
+  .checks span::before { content: "✓ "; color: var(--green); font-weight: 900; }
+  .note { margin-top: 10px; font-size: 11.5px; color: var(--muted); }
+  .rg { margin-top: 6px; font-size: 11px; color: var(--muted); }
+  :focus-visible { outline: 3px solid var(--green-hi); outline-offset: 3px; }
+  @media (max-width: 360px) { h1 { font-size: 34px; } .tile { font-size: 11.5px; } }
+  @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; } }
+</style>
+</head>
+<body>
+<main>
+  <p class="pill"><i aria-hidden="true"></i>Lotus365 · Quick sign-up</p>
+
+  <div class="app-icon"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj48cmVjdCB3aWR0aD0iNTEyIiBoZWlnaHQ9IjUxMiIgcng9Ijk2IiBmaWxsPSIjMDA4ODYxIi8+PHBhdGggZmlsbD0iI2ZmZiIgZD0iTTE1MCAxMTJoODR2MjIwaDEyOHY2OEgxNTB6Ii8+PGNpcmNsZSBjeD0iMzUyIiBjeT0iMTcyIiByPSI0NCIgZmlsbD0iI2Y5ZGYxMCIvPjwvc3ZnPgo=" width="84" height="84" alt="Lotus365"></div>
+
+  <h1>Need a <span>New ID?</span></h1>
+  <p class="lead">Skip the complicated process. Create your Lotus365 ID in about 2 minutes — the sign-up page opens as soon as you tap below.</p>
+
+  <div class="tiles">
+    <div class="tile"><b aria-hidden="true">⚡</b>Quick Sign-up</div>
+    <div class="tile"><b aria-hidden="true">📱</b>Mobile Friendly</div>
+    <div class="tile"><b aria-hidden="true">✓</b>Simple Process</div>
+  </div>
+
+  <div class="msg">
+    <span class="av" aria-hidden="true">ID</span>
+    <div><small>Your request is ready</small><strong id="msgText">New ID</strong></div>
+    <span class="dots" aria-hidden="true"><i></i><i></i><i></i></span>
+  </div>
+
+  <a class="cta" id="cta" href="https://lotus365.ac/register/?c=mSHRHaN0B">
+    GET NEW ID NOW
+    <svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+  </a>
+
+  <p class="checks"><span>Fast Sign-up</span><span>Takes ~2 Minutes</span><span>Simple Steps</span></p>
+  <p class="note">You will be taken to the Lotus365 sign-up page.</p>
+  <p class="rg">18+ only · Please play responsibly</p>
+</main>
+
+<script>
+/* ============================ SETTINGS ============================
+   SIGNUP_URL: where the button goes (your Lotus365 referral link).
+   META_PIXEL_ID: optional; your Meta (Facebook) Pixel ID for ad tracking.
+   ================================================================== */
+var SIGNUP_URL = "https://lotus365.ac/register/?c=mSHRHaN0B";
+var META_PIXEL_ID = "1022917280660411";
+/* ================================================================== */
+
+(function () {
+  var cta = document.getElementById("cta");
+  // Pass ad attribution (utm_*, gclid, fbclid) through to the sign-up page.
+  try {
+    var url = new URL(SIGNUP_URL), q = new URLSearchParams(location.search);
+    q.forEach(function (v, k) { if (/^(utm_|src$|gclid$|fbclid$)/.test(k) && !url.searchParams.has(k)) url.searchParams.set(k, v); });
+    cta.href = url.href;
+  } catch (e) { cta.href = SIGNUP_URL; }
+
+  // Meta Pixel: the queue is ready immediately (so early taps are kept); the script itself
+  // loads only after the page has rendered, so it never slows the first paint.
+  if (META_PIXEL_ID) {
+    !function (f, n) { if (f.fbq) return; n = f.fbq = function () { n.callMethod ? n.callMethod.apply(n, arguments) : n.queue.push(arguments); }; if (!f._fbq) f._fbq = n; n.push = n; n.loaded = !0; n.version = "2.0"; n.queue = []; }(window);
+    window.fbq("init", META_PIXEL_ID);
+    window.fbq("track", "PageView");
+    var loadPixel = function () {
+      var t = document.createElement("script"); t.async = true; t.src = "https://connect.facebook.net/en_US/fbevents.js";
+      document.head.appendChild(t);
+    };
+    if (document.readyState === "complete") loadPixel(); else window.addEventListener("load", loadPixel);
+  }
+
+  var going = false;
+  cta.addEventListener("click", function (e) {
+    try { (window.dataLayer = window.dataLayer || []).push({ event: "signup_click" }); } catch (err) {}
+    if (!META_PIXEL_ID || !window.fbq) return;        // no pixel: plain link, go now
+    if (e.ctrlKey || e.metaKey || e.shiftKey) { window.fbq("track", "Lead"); return; }  // new-tab clicks
+    e.preventDefault();
+    if (going) return; going = true;
+    window.fbq("track", "Lead");
+    var href = cta.href;
+    setTimeout(function () { location.href = href; }, 300);  // give the Lead event time to send
+  });
+  // Coming back with the Back button: allow tapping again.
+  window.addEventListener("pageshow", function () { going = false; });
+})();
+</script>
+</body>
+</html>
