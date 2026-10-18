@@ -9,6 +9,7 @@
 <meta name="format-detection" content="telephone=no">
 <link rel="icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj48cmVjdCB3aWR0aD0iNTEyIiBoZWlnaHQ9IjUxMiIgcng9Ijk2IiBmaWxsPSIjMDA4ODYxIi8+PHBhdGggZmlsbD0iI2ZmZiIgZD0iTTE1MCAxMTJoODR2MjIwaDEyOHY2OEgxNTB6Ii8+PGNpcmNsZSBjeD0iMzUyIiBjeT0iMTcyIiByPSI0NCIgZmlsbD0iI2Y5ZGYxMCIvPjwvc3ZnPgo=" type="image/svg+xml">
 <link rel="preconnect" href="https://lotus365.ac">
+<link rel="preconnect" href="https://newid.walink.dev">
 <link rel="dns-prefetch" href="https://lotus365.ac">
 <link rel="dns-prefetch" href="https://connect.facebook.net">
 <style>
@@ -167,32 +168,53 @@ var META_PIXEL_ID = "1468112005086550";
     cta.href = url.href;
   } catch (e) { cta.href = SIGNUP_URL; }
 
-  // Meta Pixel: the queue is ready immediately (so early taps are kept); the script itself
-  // loads only after the page has rendered, so it never slows the first paint.
-  if (META_PIXEL_ID) {
-    !function (f, n) { if (f.fbq) return; n = f.fbq = function () { n.callMethod ? n.callMethod.apply(n, arguments) : n.queue.push(arguments); }; if (!f._fbq) f._fbq = n; n.push = n; n.loaded = !0; n.version = "2.0"; n.queue = []; }(window);
-    window.fbq("init", META_PIXEL_ID);
-    window.fbq("track", "PageView");
-    var loadPixel = function () {
-      var t = document.createElement("script"); t.async = true; t.src = "https://connect.facebook.net/en_US/fbevents.js";
-      document.head.appendChild(t);
-    };
-    if (document.readyState === "complete") loadPixel(); else window.addEventListener("load", loadPixel);
+  // First-party stats (our own server): lotusid's /t isn't routed, so events go to the stats Worker on
+  // newid.walink.dev, which attributes them to lotusid.walink.dev from the browser's Origin header.
+  var STATS_URL = "https://newid.walink.dev/t";
+  function hit(e, button) {
+    try {
+      var q = new URLSearchParams(location.search);
+      var body = JSON.stringify({
+        e: e, b: button || null, r: document.referrer || null, fb: q.has("fbclid") ? 1 : 0,
+        us: q.get("utm_source"), um: q.get("utm_medium"), uc: q.get("utm_campaign"), ut: q.get("utm_content")
+      });
+      if (navigator.sendBeacon && navigator.sendBeacon(STATS_URL, new Blob([body], { type: "text/plain" }))) return;
+      fetch(STATS_URL, { method: "POST", body: body, keepalive: true, headers: { "Content-Type": "text/plain" } });
+    } catch (err) {}
   }
+  hit("view");
 
-  var going = false;
-  cta.addEventListener("click", function (e) {
+  // Meta Pixel: only PageView (on open) and Lead (on tap), sent directly; Meta's fbevents.js is not loaded,
+  // so no automatic events can fire here.
+  /* Sends one pixel event straight to Meta (~1 KB), fire-and-forget. keepalive lets it finish even while the
+     page is changing to the sign-up site, so nobody ever waits for it. Keeps _fbp and the ad click id (fbclid). */
+  var sendPixel = function (ev) {
+    if (!META_PIXEL_ID) return;
+    try {
+      var now = Date.now(), fbp = (document.cookie.match(/(?:^|; )_fbp=([^;]+)/) || [])[1];
+      if (!fbp) {
+        fbp = "fb.1." + now + "." + Math.floor(Math.random() * 1e10);
+        document.cookie = "_fbp=" + fbp + "; max-age=7776000; path=/; SameSite=Lax";
+      }
+      var p = new URLSearchParams({
+        id: META_PIXEL_ID, ev: ev, dl: location.href, rl: document.referrer, ts: String(now), fbp: fbp,
+        eid: ev.toLowerCase() + "." + now + "." + Math.random().toString(36).slice(2, 10)
+      });
+      var fbclid = new URLSearchParams(location.search).get("fbclid");
+      if (fbclid) p.set("fbc", "fb.1." + now + "." + fbclid);
+      var u = "https://www.facebook.com/tr/?" + p.toString();
+      if (window.fetch) fetch(u, { mode: "no-cors", keepalive: true, credentials: "include" }).catch(function () {});
+      else new Image().src = u;
+    } catch (err) {}
+  };
+  sendPixel("PageView");
+
+  // Button tap: Lead + stats sent fire-and-forget; the link opens the sign-up page on the same tap.
+  cta.addEventListener("click", function () {
     try { (window.dataLayer = window.dataLayer || []).push({ event: "signup_click" }); } catch (err) {}
-    if (!META_PIXEL_ID || !window.fbq) return;        // no pixel: plain link, go now
-    if (e.ctrlKey || e.metaKey || e.shiftKey) { window.fbq("track", "Lead"); return; }  // new-tab clicks
-    e.preventDefault();
-    if (going) return; going = true;
-    window.fbq("track", "Lead");
-    var href = cta.href;
-    setTimeout(function () { location.href = href; }, 300);  // give the Lead event time to send
+    hit("tap", "cta");
+    sendPixel("Lead");
   });
-  // Coming back with the Back button: allow tapping again.
-  window.addEventListener("pageshow", function () { going = false; });
 })();
 </script>
 </body>
